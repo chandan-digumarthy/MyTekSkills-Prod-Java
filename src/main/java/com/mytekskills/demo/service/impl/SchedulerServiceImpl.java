@@ -57,7 +57,8 @@ public class SchedulerServiceImpl {
 
 			//convert kiblobytes per milli seconds to kile bytes / seconds
 			//kile bytes / (milli seconds / 1000)
-			long kbps = fileSize / (timeTaken / 1000);
+			double kbps = fileSize / ((double) timeTaken / 1000);
+
 			
 			logger.log(Level.INFO, "Time taken to download file of size " + fileSize
 					+ " kb = " + timeTaken + " milli seconds");
@@ -66,7 +67,7 @@ public class SchedulerServiceImpl {
 			
 			//saving the time we made request in seconds by dividing it with 1000
 			//updating data to the singleton instance so that same can be retrieved all the time
-			CheckDownload_SingletonHelper.getInstance().list.push(kbps);
+			CheckDownload_SingletonHelper.getInstance().list.push((long)kbps);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
